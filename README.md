@@ -89,3 +89,36 @@ leafs provides columns. This might change in the future.
       end,
    }
 ```
+
+
+# Bug report
+
+When working on an [Athena DBee adapter](https://github.com/joao-alho/nvim-dbee) (very early stages) I ran into this error a lot. Was easily fixed by applying this fix.
+I don't know Lua and was very confused why the previous check for structure being null was not working.
+So maybe this is isn't needed at all.
+
+Tested on WSL2, Go version `1.22.5 linux/amd64`, neovim version `v0.11.0-dev`, LuaJIT `2.1.0-beta3` 
+
+
+```lua
+
+Error detected while processing TextChangedI Autocommands for "*":
+Error executing lua callback: ....local/share/nvim/lazy/cmp-dbee/lua/cmp-dbee/handler.lua:121: bad argument #1 to 'ipairs' (table
+expected, got nil)
+stack traceback:
+        [C]: in function 'ipairs'
+        ....local/share/nvim/lazy/cmp-dbee/lua/cmp-dbee/handler.lua:121: in function 'get_documentation'
+        ....local/share/nvim/lazy/cmp-dbee/lua/cmp-dbee/handler.lua:198: in function 'convert_to_completion_item'
+        ....local/share/nvim/lazy/cmp-dbee/lua/cmp-dbee/handler.lua:214: in function 'get_completion'
+        .../.local/share/nvim/lazy/cmp-dbee/lua/cmp-dbee/source.lua:29: in function 'complete'
+        ...jalho/.local/share/nvim/lazy/nvim-cmp/lua/cmp/source.lua:326: in function 'complete'
+        ...e/jalho/.local/share/nvim/lazy/nvim-cmp/lua/cmp/core.lua:299: in function 'complete'
+        ...e/jalho/.local/share/nvim/lazy/nvim-cmp/lua/cmp/core.lua:169: in function 'callback'
+        ...e/jalho/.local/share/nvim/lazy/nvim-cmp/lua/cmp/core.lua:229: in function 'autoindent'
+        ...e/jalho/.local/share/nvim/lazy/nvim-cmp/lua/cmp/core.lua:161: in function 'on_change'
+        ...e/jalho/.local/share/nvim/lazy/nvim-cmp/lua/cmp/init.lua:346: in function 'callback'
+        ...local/share/nvim/lazy/nvim-cmp/lua/cmp/utils/autocmd.lua:49: in function 'emit'
+        ...local/share/nvim/lazy/nvim-cmp/lua/cmp/utils/autocmd.lua:23: in function <...local/share/nvim/lazy/nvim-cmp/lua/cmp/uti
+ls/autocmd.lua:22>
+```
+

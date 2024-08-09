@@ -101,7 +101,11 @@ function Handler:get_completion()
   vim.list_extend(out, self.conn:get_schemas() or {})
   vim.list_extend(out, self.conn:get_flatten_structure() or {})
   -- we add these last so we don't polluted the list with reserved keywords
-  vim.list_extend(out, constants.reserved_sql_keywords)
+  if self.conn.db_driver == "athena" then
+    vim.list_extend(out, constants.athena_reserved_keywords)
+  else
+    vim.list_extend(out, constants.reserved_sql_keywords)
+  end
   return self:convert_many_to_completion_items(out)
 end
 

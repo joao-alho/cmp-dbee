@@ -36,6 +36,7 @@ local Connection = {}
 function Connection:new(cfg)
   local cls = {
     id = "",
+    db_driver = "",
     db_name = "",
     structures = {},
     flatten_structure = {},
@@ -92,6 +93,7 @@ function Connection:set_id()
       return
     end
     self.id = conn_id.id
+    self.db_driver = conn_id.type
     vim.notify_once("[cmp-dbee] Connection ID: " .. self.id)
   end
 
