@@ -118,7 +118,7 @@ function Handler:get_documentation(n)
   if n.name == n.schema then
     local description = {}
     local models = self.conn:get_models(n.name)
-    for _, m in ipairs(models) do
+    for _, m in ipairs(models or {}) do
       table.insert(description, "\t" .. m.type .. ": " .. m.name .. "\n")
     end
     return "schema: " .. n.name .. "\n" .. table.concat(description)

@@ -163,7 +163,7 @@ function Connection:get_models(schema)
     return {}
   end
 
-  for _, node in ipairs(structure) do
+  for _, node in ipairs(structure or {}) do
     if schema:match(node.name) and node.children then
       return node.children
     end
